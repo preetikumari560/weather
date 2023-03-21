@@ -1,0 +1,79 @@
+<%- include('header') -%>
+
+
+<body>
+    <section class="main" id="hover-element">
+     
+        <div class="conatiner-1"> 
+    <form action="/"  method="post">
+        <fieldset class="item">
+        <input type="text" id="nameInput" name="nameInput" placeholder="City Name" value="" required>
+        <button type="submit">Search</button>
+        </fieldset>
+    </form>
+
+
+<div class="city-default">
+    <h1><%=minTemp%> °C</h1>
+    <h2><%=city%>, <%=country%> </h2>
+
+<div id="clock"></div>
+<div class="date"><h3><%=date%></h3></div>
+</div>
+ </div>
+  <div class="container-2"  id="hidden-element">
+    <div class="first">
+   <img  class='img-descrp' src=<%=iconUrl%>     alt="no_weather_image_icon" >   
+    
+    
+    <p>The weather is currently <span><%=weatherDescription%></span></p>
+        <p>Temperature min. : <span><%=minTemp%> °C</span></p>      
+        <p>Humidity : <span><%=humidity%> %</span></p>
+        <p>Pressure : <span><%=pressure%> mb</span></p>
+    
+    </div >
+    <div class="last">
+        <img class="img-corner"src="/images/umb.png" alt=""  width="100px" height="100px">
+    </div>
+    </div>
+
+ 
+</section>
+</body>
+<script >
+
+const hoverElement = document.getElementById('hover-element');
+const hiddenElement = document.getElementById('hidden-element');
+
+    hoverElement.addEventListener('mouseenter', () => {
+    hiddenElement.style.display = 'grid';
+});
+
+    hoverElement.addEventListener('mouseleave', () => {
+    hiddenElement.style.display = 'none';
+});
+
+    setInterval(function() {
+        var clock = document.getElementById('clock');
+        var currentTime = new Date();
+        var hours = currentTime.getHours();
+        var minutes = currentTime.getMinutes();
+        var seconds = currentTime.getSeconds();
+        var am_pm = "AM";
+        if (hours > 12) {
+            hours -= 12;
+            am_pm = "PM";
+        }
+        if (hours == 0) {
+            hours = 12;
+            am_pm = "AM";
+        }
+        hours = hours < 10 ? "0" + hours : hours;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        clock.innerHTML = hours + ":" + minutes + ":" + seconds + " " + am_pm;
+    }, 1000);
+
+
+</script>
+<%- include('footer') -%>
